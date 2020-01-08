@@ -1225,6 +1225,12 @@
         _get(_getPrototypeOf(_default.prototype), "init", this).call(this);
       }
     }, {
+      key: "updateVsSpeed",
+      value: function updateVsSpeed() {
+        this.vs.options.mouseMultiplier = speed;
+        this.vs.options.touchMultiplier = speed;
+      }
+    }, {
       key: "setScrollLimit",
       value: function setScrollLimit() {
         this.instance.limit = this.el.offsetHeight - this.windowHeight;
