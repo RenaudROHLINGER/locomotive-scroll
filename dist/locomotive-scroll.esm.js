@@ -1220,9 +1220,14 @@ function (_Core) {
     }
   }, {
     key: "updateVsSpeed",
-    value: function updateVsSpeed() {
-      this.vs.options.mouseMultiplier = speed;
-      this.vs.options.touchMultiplier = speed;
+    value: function updateVsSpeed(ds, ms) {
+      if (ds) {
+        this.vs.options.mouseMultiplier = ds;
+      }
+
+      if (ms) {
+        this.vs.options.touchMultiplier = ms;
+      }
     }
   }, {
     key: "setScrollLimit",
@@ -1823,6 +1828,11 @@ function () {
     key: "scrollTo",
     value: function scrollTo(target, offset, immediateScrollTo) {
       this.scroll.scrollTo(target, offset, immediateScrollTo);
+    }
+  }, {
+    key: "setSpeed",
+    value: function setSpeed(desktopSpeed, mobileSpeed) {
+      this.scroll.updateVsSpeed(ds, ms);
     }
   }, {
     key: "setScroll",

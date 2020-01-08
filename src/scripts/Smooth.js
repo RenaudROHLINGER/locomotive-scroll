@@ -75,9 +75,13 @@ export default class extends Core {
 
         super.init();
     }
-    updateVsSpeed() {
-        this.vs.options.mouseMultiplier = speed
-        this.vs.options.touchMultiplier = speed
+    updateVsSpeed(ds, ms) {
+        if (ds) {
+            this.vs.options.mouseMultiplier = ds
+        }
+        if (ms) {
+            this.vs.options.touchMultiplier = ms
+        }
     }
     setScrollLimit() {
         this.instance.limit = this.el.offsetHeight - this.windowHeight;
