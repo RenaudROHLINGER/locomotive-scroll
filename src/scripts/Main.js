@@ -44,7 +44,7 @@ export default class {
         this.scroll.scrollTo(target, offset, immediateScrollTo);
     }
     setSpeed(desktopSpeed, mobileSpeed) {
-        this.scroll.updateVsSpeed(ds, ms);
+        this.scroll.updateVsSpeed(desktopSpeed, mobileSpeed);
     }
 
     setScroll(x,y) {
