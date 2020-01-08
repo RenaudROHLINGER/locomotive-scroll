@@ -1835,7 +1835,7 @@
     }, {
       key: "setSpeed",
       value: function setSpeed(desktopSpeed, mobileSpeed) {
-        this.scroll.updateVsSpeed(ds, ms);
+        this.scroll.updateVsSpeed(desktopSpeed, mobileSpeed);
       }
     }, {
       key: "setScroll",
