@@ -204,7 +204,9 @@ export default class extends Core {
 
     updateScroll(e) {
         if (this.isScrolling || this.isDraggingScrollbar) {
-            this.instance.scroll.y = lerp(this.instance.scroll.y, this.instance.delta.y, this.inertia * this.inertiaRatio);
+            const dist = Math.abs(this.instance.delta.y - this.instance.scroll.y)
+            console.log(dist)
+            this.instance.scroll.y = lerp(this.instance.scroll.y, this.instance.delta.y, dist > 5000 ? 1.0 : this.inertia * this.inertiaRatio);
         } else {
             this.instance.scroll.y = this.instance.delta.y;
         }
@@ -536,10 +538,8 @@ export default class extends Core {
             offset = offsetTop + offset - parentSectionOffset;
         }
         offset -= this.instance.scroll.y;
-        const distanceDelta = Math.abs(this.instance.delta.y - this.instance.scroll.y)
-        console.log(distanceDelta)
-        this.instance.delta.y = immediateScrollTo ? offsetOption : offset; // Actual scrollTo (the lerp will do the animation itself)
-        this.inertiaRatio = (distanceDelta > 5000 || immediateScrollTo) ? 1.0 : Math.min(4000 / distanceDelta, inertia);
+        this.instance.delta.y = immediateScrollTo ? offsetOption : Math.min(offset, this.instance.limit); // Actual scrollTo (the lerp will do the animation itself)
+        this.inertiaRatio = immediateScrollTo ? 1.0 : Math.min(4000 / Math.abs(this.instance.delta.y - this.instance.scroll.y), inertia);
 
         if (immediateScrollTo) {
             this.instance.scroll.y = this.instance.delta.y;
