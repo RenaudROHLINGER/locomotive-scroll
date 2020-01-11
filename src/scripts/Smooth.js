@@ -195,18 +195,13 @@ export default class extends Core {
 
     updateDelta(e) {
         this.instance.delta.y -= e.deltaY;
-        // CHANGE SYSTEM LIMIT TO INIFNITY
-        // if (this.instance.delta.y < 0) this.instance.delta.y = 0;
-        // if (this.instance.delta.y > this.instance.limit) this.instance.delta.y = this.instance.limit;
-        if (this.instance.delta.y < 0) this.instance.delta.y = this.instance.limit;
-        if (this.instance.delta.y > this.instance.limit) this.instance.delta.y = 0;
+        if (this.instance.delta.y < 0) this.instance.delta.y = 0;
+        if (this.instance.delta.y > this.instance.limit) this.instance.delta.y = this.instance.limit;
     }
 
     updateScroll(e) {
         if (this.isScrolling || this.isDraggingScrollbar) {
-            const dist = Math.abs(this.instance.delta.y - this.instance.scroll.y)
-            console.log(dist)
-            this.instance.scroll.y = lerp(this.instance.scroll.y, this.instance.delta.y, dist > 5000 ? 1.0 : this.inertia * this.inertiaRatio);
+            this.instance.scroll.y = lerp(this.instance.scroll.y, this.instance.delta.y, this.inertia * this.inertiaRatio);
         } else {
             this.instance.scroll.y = this.instance.delta.y;
         }
