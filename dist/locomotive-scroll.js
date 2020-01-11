@@ -1363,9 +1363,12 @@
     }, {
       key: "updateDelta",
       value: function updateDelta(e) {
-        this.instance.delta.y -= e.deltaY;
-        if (this.instance.delta.y < 0) this.instance.delta.y = 0;
-        if (this.instance.delta.y > this.instance.limit) this.instance.delta.y = this.instance.limit;
+        this.instance.delta.y -= e.deltaY; // CHANGE SYSTEM LIMIT TO INIFNITY
+        // if (this.instance.delta.y < 0) this.instance.delta.y = 0;
+        // if (this.instance.delta.y > this.instance.limit) this.instance.delta.y = this.instance.limit;
+
+        if (this.instance.delta.y < 0) this.instance.delta.y = this.instance.limit;
+        if (this.instance.delta.y > this.instance.limit) this.instance.delta.y = 0;
       }
     }, {
       key: "updateScroll",
@@ -1719,7 +1722,7 @@
         }
 
         offset -= this.instance.scroll.y;
-        this.instance.delta.y = immediateScrollTo ? offsetOption : Math.min(offset, this.instance.limit); // Actual scrollTo (the lerp will do the animation itself)
+        this.instance.delta.y = immediateScrollTo ? offsetOption : offset; // Actual scrollTo (the lerp will do the animation itself)
 
         this.inertiaRatio = immediateScrollTo ? 1.0 : Math.min(4000 / Math.abs(this.instance.delta.y - this.instance.scroll.y), inertia);
 
