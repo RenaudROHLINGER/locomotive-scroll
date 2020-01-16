@@ -48,6 +48,7 @@ export default class extends Core {
             touchMultiplier: this.touchMultiplier,
             useKeyboard: false,
             passive: true,
+            limitInertia: true
         });
 
         this.vs.on((e) => {

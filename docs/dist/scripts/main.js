@@ -1194,7 +1194,8 @@
           firefoxMultiplier: this.firefoxMultiplier,
           touchMultiplier: this.touchMultiplier,
           useKeyboard: false,
-          passive: true
+          passive: true,
+          limitInertia: true
         });
         this.vs.on(function (e) {
           if (_this2.stop) {
