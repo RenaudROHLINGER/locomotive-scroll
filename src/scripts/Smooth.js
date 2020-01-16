@@ -47,8 +47,7 @@ export default class extends Core {
             firefoxMultiplier: this.firefoxMultiplier,
             touchMultiplier: this.touchMultiplier,
             useKeyboard: false,
-            passive: true,
-            limitInertia: true
+            passive: true
         });
 
         this.vs.on((e) => {
