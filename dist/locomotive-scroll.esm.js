@@ -1350,7 +1350,6 @@ function (_Core) {
     key: "updateDelta",
     value: function updateDelta(e) {
       this.instance.delta.y -= e.deltaY;
-      console.log(this.instance.delta.y, this.startBlockPosition);
       if (this.instance.delta.y < this.startBlockPosition) this.instance.delta.y = this.startBlockPosition;
       if (this.instance.delta.y > this.instance.limit) this.instance.delta.y = this.instance.limit;
     }
