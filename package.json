@@ -8,6 +8,7 @@
     "main": "./dist/locomotive-scroll.js",
     "module": "./dist/locomotive-scroll.esm.js",
     "dependencies": {
+        "locomotive-scroll": "https://github.com/ozizo/locomotive-scroll",
         "virtual-scroll": "git+https://github.com/ayamflow/virtual-scroll.git"
     },
     "devDependencies": {

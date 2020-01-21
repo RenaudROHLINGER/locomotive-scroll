@@ -47,7 +47,9 @@ export default class extends Core {
             firefoxMultiplier: this.firefoxMultiplier,
             touchMultiplier: this.touchMultiplier,
             useKeyboard: false,
-            passive: true
+            passive: true,
+            // break smooth on safari because this navigator is trash
+            limitInertia: navigator.userAgent.toLowerCase().indexOf('safari/') > -1
         });
 
         this.vs.on((e) => {
