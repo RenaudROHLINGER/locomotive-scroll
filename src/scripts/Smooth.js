@@ -518,19 +518,20 @@ export default class extends Core {
 
         // We have a target, get it's coordinates
         if (target) {
-            // Get target offset from top
-            const targetBCR = target.getBoundingClientRect()
-            const offsetTop = targetBCR.top + this.instance.scroll.y
+            // MAYBE  BROKE STUFF UT GETBOUNDINGCLIENTRECT RECALCULATE DOM AND MAKE LAG
+            // // Get target offset from top
+            // const targetBCR = target.getBoundingClientRect()
+            // const offsetTop = targetBCR.top + this.instance.scroll.y
 
-            // Try and find the target's parent section
-            const targetParents = getParents(target)
-            const parentSection = targetParents.find(candidate => this.sections.find(section => section.el == candidate))
-            let parentSectionOffset = 0
-            if(parentSection) {
-                parentSectionOffset = getTranslate(parentSection).y // We got a parent section, store it's current offset to remove it later
-            }
-            // Final value of scroll destination : offsetTop + (optional offset given in options) - (parent's section translate)
-            offset = offsetTop + offset - parentSectionOffset;
+            // // Try and find the target's parent section
+            // const targetParents = getParents(target)
+            // const parentSection = targetParents.find(candidate => this.sections.find(section => section.el == candidate))
+            // let parentSectionOffset = 0
+            // if(parentSection) {
+            //     parentSectionOffset = getTranslate(parentSection).y // We got a parent section, store it's current offset to remove it later
+            // }
+            // // Final value of scroll destination : offsetTop + (optional offset given in options) - (parent's section translate)
+            // offset = offsetTop + offset - parentSectionOffset;
         }
         offset -= this.instance.scroll.y;
         this.instance.delta.y = immediateScrollTo ? offsetOption : Math.min(offset, this.instance.limit); // Actual scrollTo (the lerp will do the animation itself)

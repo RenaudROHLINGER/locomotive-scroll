@@ -1127,23 +1127,6 @@
     return translate;
   }
 
-  /**
-   * Returns an array containing all the parent nodes of the given node
-   * @param  {object} node
-   * @return {array} parent nodes
-   */
-  function getParents(elem) {
-    // Set up a parent array
-    var parents = []; // Push each parent element to the array
-
-    for (; elem && elem !== document; elem = elem.parentNode) {
-      parents.push(elem);
-    } // Return our parent array
-
-
-    return parents;
-  } // https://gomakethings.com/how-to-get-the-closest-parent-element-with-a-matching-selector-using-vanilla-javascript/
-
   var keyCodes$1 = {
     LEFT: 37,
     UP: 38,
@@ -1679,8 +1662,6 @@
     }, {
       key: "scrollTo",
       value: function scrollTo(targetOption, offsetOption, immediateScrollTo) {
-        var _this9 = this;
-
         var target;
         var offset = offsetOption ? parseInt(offsetOption) : 0;
 
@@ -1695,28 +1676,6 @@
         } else if (!targetOption.target) {
           target = targetOption;
         } // We have a target, get it's coordinates
-
-
-        if (target) {
-          // Get target offset from top
-          var targetBCR = target.getBoundingClientRect();
-          var offsetTop = targetBCR.top + this.instance.scroll.y; // Try and find the target's parent section
-
-          var targetParents = getParents(target);
-          var parentSection = targetParents.find(function (candidate) {
-            return _this9.sections.find(function (section) {
-              return section.el == candidate;
-            });
-          });
-          var parentSectionOffset = 0;
-
-          if (parentSection) {
-            parentSectionOffset = getTranslate(parentSection).y; // We got a parent section, store it's current offset to remove it later
-          } // Final value of scroll destination : offsetTop + (optional offset given in options) - (parent's section translate)
-
-
-          offset = offsetTop + offset - parentSectionOffset;
-        }
 
         offset -= this.instance.scroll.y;
         this.instance.delta.y = immediateScrollTo ? offsetOption : Math.min(offset, this.instance.limit); // Actual scrollTo (the lerp will do the animation itself)
