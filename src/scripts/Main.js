@@ -46,6 +46,9 @@ export default class {
     setSpeed(desktopSpeed, mobileSpeed) {
         this.scroll.updateVsSpeed(desktopSpeed, mobileSpeed);
     }
+    setMinimumPosition(minimumpos) {
+        this.scroll.updateMinimumPos(minimumpos);
+    }
 
     setScroll(x,y) {
         this.scroll.setScroll(x,y);

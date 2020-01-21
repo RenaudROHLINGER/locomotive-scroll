@@ -25,7 +25,6 @@ export default class extends Core {
         this.parallaxElements = [];
         this.inertiaRatio = 1;
         this.stop = false;
-
         this.checkKey = this.checkKey.bind(this);
         window.addEventListener('keydown', this.checkKey, false);
     }
@@ -40,6 +39,7 @@ export default class extends Core {
             },
             ...this.instance
         }
+        var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
 
         this.vs = new virtualScroll({
             el: this.el,
@@ -49,7 +49,7 @@ export default class extends Core {
             useKeyboard: false,
             passive: true,
             // break smooth on safari because this navigator is trash
-            limitInertia: navigator.userAgent.toLowerCase().indexOf('safari/') > -1
+            limitInertia: isSafari
         });
 
         this.vs.on((e) => {
@@ -85,6 +85,9 @@ export default class extends Core {
             this.vs.options.touchMultiplier = ms
         }
     }
+    updateMinimumPos(minimumpos) {
+        this.startBlockPosition = minimumpos
+    }
     setScrollLimit() {
         this.instance.limit = this.el.offsetHeight - this.windowHeight;
     }
@@ -106,13 +109,13 @@ export default class extends Core {
 
         switch(e.keyCode) {
             case keyCodes.TAB:
-                setTimeout(() => {
-                    document.documentElement.scrollTop = 0;
-                    document.body.scrollTop = 0;
-                    if(!(document.activeElement instanceof HTMLBodyElement)){
-                        this.scrollTo(document.activeElement, - window.innerHeight / 2);
-                    }
-                }, 0);
+                // setTimeout(() => {
+                //     document.documentElement.scrollTop = 0;
+                //     document.body.scrollTop = 0;
+                //     if(!(document.activeElement instanceof HTMLBodyElement)){
+                //         this.scrollTo(document.activeElement, - window.innerHeight / 2);
+                //     }
+                // }, 0);
                 break;
             case keyCodes.UP:
                 this.instance.delta.y -= 240;
@@ -121,13 +124,13 @@ export default class extends Core {
                 this.instance.delta.y += 240;
                 break;
             case keyCodes.SPACE:
-                if(!(document.activeElement instanceof HTMLInputElement) && !(document.activeElement instanceof HTMLTextAreaElement)) {
-                    if(e.shiftKey) {
-                        this.instance.delta.y -= window.innerHeight;
-                    } else {
-                        this.instance.delta.y += window.innerHeight;
-                    }
-                }
+                // if(!(document.activeElement instanceof HTMLInputElement) && !(document.activeElement instanceof HTMLTextAreaElement)) {
+                //     if(e.shiftKey) {
+                //         this.instance.delta.y -= window.innerHeight;
+                //     } else {
+                //         this.instance.delta.y += window.innerHeight;
+                //     }
+                // }
                 break;
             default:
                 return;
@@ -197,7 +200,8 @@ export default class extends Core {
 
     updateDelta(e) {
         this.instance.delta.y -= e.deltaY;
-        if (this.instance.delta.y < 0) this.instance.delta.y = 0;
+        console.log(this.instance.delta.y, this.startBlockPosition)
+        if (this.instance.delta.y < this.startBlockPosition) this.instance.delta.y = this.startBlockPosition;
         if (this.instance.delta.y > this.instance.limit) this.instance.delta.y = this.instance.limit;
     }
 
