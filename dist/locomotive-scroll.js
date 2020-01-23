@@ -3,7 +3,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = global || self, global.LocomotiveScroll = factory());
-}(this, (function () { 'use strict';
+}(this, function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -61,13 +61,13 @@
       var source = arguments[i] != null ? arguments[i] : {};
 
       if (i % 2) {
-        ownKeys(Object(source), true).forEach(function (key) {
+        ownKeys(source, true).forEach(function (key) {
           _defineProperty(target, key, source[key]);
         });
       } else if (Object.getOwnPropertyDescriptors) {
         Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
       } else {
-        ownKeys(Object(source)).forEach(function (key) {
+        ownKeys(source).forEach(function (key) {
           Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
         });
       }
@@ -413,173 +413,6 @@
 
     return _default;
   }();
-
-  var _default$1 =
-  /*#__PURE__*/
-  function (_Core) {
-    _inherits(_default, _Core);
-
-    function _default() {
-      var _this;
-
-      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-      _classCallCheck(this, _default);
-
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(_default).call(this, options));
-      window.addEventListener('scroll', _this.checkScroll, false);
-      return _this;
-    }
-
-    _createClass(_default, [{
-      key: "init",
-      value: function init() {
-        this.instance.scroll.y = window.pageYOffset;
-        this.addElements();
-        this.detectElements();
-
-        _get(_getPrototypeOf(_default.prototype), "init", this).call(this);
-      }
-    }, {
-      key: "checkScroll",
-      value: function checkScroll() {
-        var _this2 = this;
-
-        _get(_getPrototypeOf(_default.prototype), "checkScroll", this).call(this);
-
-        this.instance.scroll.y = window.pageYOffset;
-
-        if (this.els.length) {
-          if (!this.hasScrollTicking) {
-            requestAnimationFrame(function () {
-              _this2.detectElements();
-            });
-            this.hasScrollTicking = true;
-          }
-        }
-      }
-    }, {
-      key: "checkResize",
-      value: function checkResize() {
-        var _this3 = this;
-
-        if (this.els.length) {
-          this.windowHeight = window.innerHeight;
-
-          if (!this.hasScrollTicking) {
-            requestAnimationFrame(function () {
-              _this3.updateElements();
-            });
-            this.hasScrollTicking = true;
-          }
-        }
-      }
-    }, {
-      key: "addElements",
-      value: function addElements() {
-        var _this4 = this;
-
-        this.els = [];
-        var els = this.el.querySelectorAll('[data-' + this.name + ']');
-        els.forEach(function (el, i) {
-          var cl = el.dataset[_this4.name + 'Class'] || _this4["class"];
-
-          var top = el.getBoundingClientRect().top + _this4.instance.scroll.y;
-
-          var bottom = top + el.offsetHeight;
-          var offset = parseInt(el.dataset[_this4.name + 'Offset']) || parseInt(_this4.offset);
-          var repeat = el.dataset[_this4.name + 'Repeat'];
-          var call = el.dataset[_this4.name + 'Call'];
-
-          if (repeat == 'false') {
-            repeat = false;
-          } else if (repeat != undefined) {
-            repeat = true;
-          } else {
-            repeat = _this4.repeat;
-          }
-
-          var mappedEl = {
-            el: el,
-            id: i,
-            "class": cl,
-            top: top + offset,
-            bottom: bottom,
-            offset: offset,
-            repeat: repeat,
-            inView: false,
-            call: call
-          };
-
-          _this4.els.push(mappedEl);
-        });
-      }
-    }, {
-      key: "updateElements",
-      value: function updateElements() {
-        var _this5 = this;
-
-        this.els.forEach(function (el, i) {
-          var top = el.el.getBoundingClientRect().top + _this5.instance.scroll.y;
-
-          var bottom = top + el.el.offsetHeight;
-          _this5.els[i].top = top + el.offset;
-          _this5.els[i].bottom = bottom;
-        });
-        this.hasScrollTicking = false;
-      }
-      /**
-       * Scroll to a desired target.
-       *
-       * @param  {object} options
-       * @return {void}
-       */
-
-    }, {
-      key: "scrollTo",
-      value: function scrollTo(targetOption, offsetOption) {
-        var target;
-        var offset = offsetOption ? parseInt(offsetOption) : 0;
-
-        if (typeof targetOption === 'string') {
-          if (targetOption === 'top') {
-            target = this.html;
-          } else if (targetOption === 'bottom') {
-            offset = this.html.offsetHeight - window.innerHeight;
-          } else {
-            target = document.querySelectorAll(targetOption)[0];
-          }
-        } else if (!targetOption.target) {
-          target = targetOption;
-        }
-
-        if (target) {
-          offset = target.getBoundingClientRect().top + offset;
-        }
-
-        offset += this.instance.scroll.y;
-        window.scrollTo({
-          top: offset,
-          behavior: 'smooth'
-        });
-      }
-    }, {
-      key: "update",
-      value: function update() {
-        this.addElements();
-        this.detectElements();
-      }
-    }, {
-      key: "destroy",
-      value: function destroy() {
-        _get(_getPrototypeOf(_default.prototype), "destroy", this).call(this);
-
-        window.removeEventListener('scroll', this.checkScroll, false);
-      }
-    }]);
-
-    return _default;
-  }(_default);
 
   /*
   object-assign
@@ -1137,7 +970,7 @@
     TAB: 9
   };
 
-  var _default$2 =
+  var _default$1 =
   /*#__PURE__*/
   function (_Core) {
     _inherits(_default, _Core);
@@ -1751,7 +1584,7 @@
     return _default;
   }(_default);
 
-  var _default$3 =
+  var _default$2 =
   /*#__PURE__*/
   function () {
     function _default() {
@@ -1771,12 +1604,7 @@
           this.isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
         }
 
-        if (this.smooth === true && !this.isMobile) {
-          this.scroll = new _default$2(this.options);
-        } else {
-          this.scroll = new _default$1(this.options);
-        }
-
+        this.scroll = new _default$1(this.options);
         this.scroll.init();
 
         if (window.location.hash) {
@@ -1838,6 +1666,6 @@
     return _default;
   }();
 
-  return _default$3;
+  return _default$2;
 
-})));
+}));

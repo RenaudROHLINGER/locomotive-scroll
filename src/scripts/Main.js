@@ -15,11 +15,7 @@ export default class {
             this.isMobile = (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
         }
 
-        if (this.smooth === true && !this.isMobile) {
-            this.scroll = new Smooth(this.options);
-        } else {
-            this.scroll = new Scroll(this.options);
-        }
+        this.scroll = new Smooth(this.options);
 
         this.scroll.init();
 
