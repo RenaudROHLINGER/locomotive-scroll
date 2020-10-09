@@ -9,8 +9,8 @@
     "module": "./dist/locomotive-scroll.esm.js",
     "dependencies": {
         "gulp": "^4.0.2",
-        "locomotive-scroll": "https://github.com/ozizo/locomotive-scroll",
-        "virtual-scroll": "git+https://github.com/ayamflow/virtual-scroll.git"
+        "locomotive-scroll": "https://github.com/RenaudROHLINGER/locomotive-scroll",
+        "virtual-scroll": "https://github.com/ayamflow/virtual-scroll"
     },
     "devDependencies": {
         "@modularbp/gulp": "^1.0.5",
